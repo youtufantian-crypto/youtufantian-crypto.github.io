@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>行数表示テキストエリア</title>
+<style type="text/css">
+body {
+  font-family: sans-serif;
+}
+
+textarea {
+  width: 800px;
+  height: 500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: monospace;
+  line-height: 1.5;
+  outline: none;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+p {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 5px;
+}
+
+body {
+  background-image: url("https://www.photolibrary.jp/mhd2/img514/450-201702261717219322.jpg");
+  background-size: cover;
+}
+
+
+h1 {
+  /* 背景色を半透明の白色に設定 */
+  background-color: rgba(255, 255, 255, 0.7);
+}
+</style>
+</head>
+<body>
+
+<h1>テキスト入力サイト</h1>
+
+<textarea id="myTextarea"></textarea>
+<p>文字数: <span id="charCount">0</span>　行数: <span id="lineCount">1</span></p>
+<button onclick="copyText()">文章をコピー</button>
+
+<script>
+// 1. 要素の取得
+const textarea = document.getElementById('myTextarea');
+const charCountElement = document.getElementById('charCount');
+const lineCountElement = document.getElementById('lineCount');
+
+// 2. 文字数と行数の更新機能
+// テキストエリアへの入力（input）があるたびに、文字数と行数を更新します
+textarea.addEventListener('input', () => {
+  // 文字数をカウント
+  const charCount = textarea.value.length;
+  charCountElement.textContent = charCount;
+  
+  // 行数をカウント
+  // テキストエリアの値を改行文字 `\n` で分割し、配列の長さを取得
+  const lineCount = textarea.value.split('\n').length;
+  lineCountElement.textContent = lineCount;
+});
+
+// 3. コピー機能
+function copyText() {
+  textarea.select();
+  document.execCommand('copy');
+  alert('文章がコピーされました！');
+}
+</script>
+
+</body>
+</html>
